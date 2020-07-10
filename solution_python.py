@@ -15,20 +15,16 @@ class EventSourcer():
         self.undo_commands.append(-num)
 
     def undo(self):
-        try:
+        if len(self.undo_commands) > 0:
             num = self.undo_commands.pop()
             self.value -= num
             self.redo_commands.append(num)
-        except:
-            pass
 
     def redo(self):
-        try:
+        if len(self.redo_commands) > 0:
             num = self.redo_commands.pop()
             self.value += num
             self.undo_commands.append(num)
-        except:
-            pass
 
     def bulk_undo(self, steps: int):
         for x in range(steps):
